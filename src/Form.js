@@ -32,19 +32,23 @@ const RSAForm = ({ type }) => {
     type === "encrypt" ? (
       <div>
         <h2>Shifrlash natijasi:</h2>
-        <p>{result_e}</p>
+        <h3>
+          <i>{result_e}</i>
+        </h3>
       </div>
     ) : (
       <div>
         <h2>Deshifrlash natijasi:</h2>
-        <p>{result_d}</p>
+        <h3>
+          <i>{result_d}</i>
+        </h3>
       </div>
     );
 
   return (
     <>
       {type === "encrypt" ? (
-        <div>
+        <div className="encrypt__wrap">
           <h1>RSA algoritmi yordamida shifrlash</h1>
           <Formik
             initialValues={{
@@ -57,7 +61,7 @@ const RSAForm = ({ type }) => {
             onSubmit={(values) => onSubmitEncrypt(values)}
             innerRef={formRef}
           >
-            <Form>
+            <Form className="encrypt__form">
               <label>
                 p ni kiriting:
                 <Field
@@ -66,8 +70,10 @@ const RSAForm = ({ type }) => {
                   type="number"
                   onKeyUp={(e) => handleInput(e)}
                 />
-                <ErrorMessage name="p" />
               </label>
+              <div>
+                <ErrorMessage name="p" />
+              </div>
               <label>
                 q ni kiriting:
                 <Field
@@ -76,8 +82,10 @@ const RSAForm = ({ type }) => {
                   type="number"
                   onKeyUp={(e) => handleInput(e)}
                 />
-                <ErrorMessage name="q" />
               </label>
+              <div>
+                <ErrorMessage name="q" />
+              </div>
               <label>
                 e ning qiymatlaridan birini tanlang:{" "}
                 {possibleE && possibleE.join(", ")}
@@ -87,14 +95,18 @@ const RSAForm = ({ type }) => {
                   type="number"
                   onFocus={showE}
                 />
-                <ErrorMessage name="e" />
               </label>
+              <div>
+                <ErrorMessage name="e" />
+              </div>
               <label>
                 Shifrlash uchun xabar kiriting
                 <Field name="message" placeholder="Xabar" as="textarea" />
-                <ErrorMessage name="message" />
               </label>
-              <button type="submit">Submit</button>
+              <div>
+                <ErrorMessage name="message" />
+              </div>
+              <button type="submit">Shifrlash</button>
             </Form>
           </Formik>
         </div>

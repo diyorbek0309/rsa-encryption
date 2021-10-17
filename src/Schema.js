@@ -13,6 +13,7 @@ export const EncryptSchema = Yup.object().shape({
     .required("e kiritilishi shart!")
     .positive("Musbat son kiriting!")
     .integer("Butun son kiriting!"),
+  message: Yup.string().required("Xabar kiritilishi shart!"),
 });
 
 export const DecryptSchema = Yup.object().shape({
