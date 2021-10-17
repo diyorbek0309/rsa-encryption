@@ -1,64 +1,10 @@
-import {
-  Formik,
-  Form,
-  Field,
-  ErrorMessage,
-  useField,
-  useFormikContext,
-} from "formik";
-import * as Yup from "yup";
+import { Formik, Form, Field, ErrorMessage } from "formik"
 import { encode, decode } from "./functions";
-import { useEffect } from "react";
+import { EncryptSchema, DecryptSchema } from "./Schema"
 
 let possible_e;
 
-const EncryptSchema = Yup.object().shape({
-  p: Yup.number()
-    .required("p kiritilishi shart!")
-    .positive("Musbat son kiriting!")
-    .integer("Butun son kiriting!"),
-  q: Yup.number()
-    .required("q kiritilishi shart!")
-    .positive("Musbat son kiriting!")
-    .integer("Butun son kiriting!"),
-  e: Yup.number()
-    .required("e kiritilishi shart!")
-    .positive("Musbat son kiriting!")
-    .integer("Butun son kiriting!"),
-});
-
-const DecryptSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(2, "Too Short!")
-    .max(70, "Too Long!")
-    .required("Kiritilishi shart!"),
-  email: Yup.string().email("Invalid email").required("Required"),
-});
-
-const MyField = (props) => {
-  const {
-    values: { p, q },
-    touched,
-    setFieldValue,
-  } = useFormikContext();
-  const [field, meta] = useField(props);
-
-  useEffect(() => {
-    if (p !== "" && q !== "" && touched.p && touched.q) {
-      setFieldValue(props.name, `textA: ${p}, textB: ${q}`);
-    }
-  }, [p, q, touched.p, touched.q, setFieldValue, props.name]);
-
-  return (
-    <>
-      <input {...props} {...field} />
-      {!!meta.touched && !!meta.error && <div>{meta.error}</div>}
-    </>
-  );
-};
-
 const RSAForm = ({ type }) => {
-  console.log(type);
   let result_e = encode();
   let result_d = decode();
 
@@ -101,7 +47,8 @@ const RSAForm = ({ type }) => {
               </label>
               <label>
                 e ning ushbu qiymatlaridan birini tanlang (`${possible_e}`)
-                <MyField name="textC" />
+                <Field name="e" placeholder="e ning qiymati" />
+                <ErrorMessage name="q" />
               </label>
               <button type="submit">Submit</button>
             </Form>
