@@ -1,5 +1,5 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { encode, decode } from "./functions";
+import { encrypt, decrypt } from "./functions";
 import { EncryptSchema, DecryptSchema } from "./Schema";
 import { calculatorE } from "./Utilities";
 import { useRef, useState } from "react";
@@ -10,6 +10,8 @@ const RSAForm = ({ type }) => {
   const [q, setQ] = useState("");
   const [result_e, setResult_e] = useState("");
   const [result_d, setResult_d] = useState("");
+
+  console.log(p, q);
 
   const formRef = useRef();
 
@@ -24,8 +26,11 @@ const RSAForm = ({ type }) => {
   };
 
   const onSubmitEncrypt = ({ p, q, e, message }) => {
-    console.log(p, q, e, message);
-    setResult_e(encode(p, q, e, 2, message));
+    setResult_e(encrypt(p, q, e, message));
+  };
+
+  const onSubmitDecrypt = () => {
+    setResult_d(decrypt());
   };
 
   let result =
@@ -111,24 +116,43 @@ const RSAForm = ({ type }) => {
           </Formik>
         </div>
       ) : (
-        <div>
+        <div className="encrypt__wrap">
           <h1>RSA algoritmi yordamida deshifrlash</h1>
           <Formik
             initialValues={{
-              name: "",
-              email: "",
+              d: "",
+              data: "",
             }}
             validationSchema={DecryptSchema}
-            onSubmit={(values) => {
-              console.log(values);
-            }}
+            onSubmit={(values) => onSubmitDecrypt(values)}
+            innerRef={formRef}
           >
-            <Form>
-              <Field name="name" />
-              <ErrorMessage name="name" />
-              <Field name="email" type="email" />
-              <ErrorMessage name="email" />
-              <button type="submit">Submit</button>
+            <Form className="encrypt__form">
+              <label>
+                d ni kiriting:
+                <Field
+                  name="d"
+                  placeholder="d ning qiymati"
+                  type="number"
+                  onKeyUp={(e) => handleInput(e)}
+                />
+              </label>
+              <div>
+                <ErrorMessage name="d" />
+              </div>
+              <label>
+                Shifrlash natijasini kiriting:
+                <Field
+                  name="data"
+                  placeholder="Natija"
+                  type="number"
+                  onKeyUp={(e) => handleInput(e)}
+                />
+              </label>
+              <div>
+                <ErrorMessage name="data" />
+              </div>
+              <button type="submit">Deshifrlash</button>
             </Form>
           </Formik>
         </div>
