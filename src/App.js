@@ -1,7 +1,6 @@
 import "./App.css";
 import { Tab, Tabs } from "react-bootstrap";
-import Decrypt from "./Decrypt";
-import Encrypt from "./Encrypt";
+import RSAForm from "./Form";
 import "bootstrap/dist/css/bootstrap.css";
 
 function App() {
@@ -9,10 +8,10 @@ function App() {
     <div className="App">
       <Tabs id="controlled-tab-example" className="mb-3">
         <Tab eventKey="encrypt" title="Shifrlash">
-          <Encrypt />
+          <RSAForm type="encrypt" />
         </Tab>
         <Tab eventKey="decrypt" title="Deshifrlash">
-          <Decrypt />
+          <RSAForm />
         </Tab>
       </Tabs>
     </div>
