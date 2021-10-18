@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "big-integer": "^1.6.50",
     "bootstrap": "5.1.1",
     "cra-template": "1.1.2",
     "formik": "^2.2.9",

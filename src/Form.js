@@ -26,11 +26,11 @@ const RSAForm = ({ type }) => {
   };
 
   const onSubmitEncrypt = ({ p, q, e, message }) => {
-    setResult_e(encrypt(p, q, e, 2, message));
+    setResult_e(encrypt(p, q, e, message));
   };
 
-  const onSubmitDecrypt = () => {
-    setResult_d(decrypt());
+  const onSubmitDecrypt = ({ d, n, data }) => {
+    setResult_d(decrypt(d, n, data));
   };
 
   let result =
@@ -42,6 +42,9 @@ const RSAForm = ({ type }) => {
         </h3>
         <h3>
           <i>d = {result_e.d}</i>
+        </h3>
+        <h3>
+          <i>n = {result_e.n}</i>
         </h3>
       </div>
     ) : (
@@ -124,6 +127,7 @@ const RSAForm = ({ type }) => {
           <Formik
             initialValues={{
               d: "",
+              n: "",
               data: "",
             }}
             validationSchema={DecryptSchema}
@@ -144,11 +148,23 @@ const RSAForm = ({ type }) => {
                 <ErrorMessage name="d" />
               </div>
               <label>
+                n ni kiriting:
+                <Field
+                  name="n"
+                  placeholder="n ning qiymati"
+                  type="number"
+                  onKeyUp={(e) => handleInput(e)}
+                />
+              </label>
+              <div>
+                <ErrorMessage name="n" />
+              </div>
+              <label>
                 Shifrlash natijasini kiriting:
                 <Field
                   name="data"
                   placeholder="Natija"
-                  type="number"
+                  as="textarea"
                   onKeyUp={(e) => handleInput(e)}
                 />
               </label>

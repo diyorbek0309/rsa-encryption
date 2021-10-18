@@ -21,8 +21,9 @@ export const DecryptSchema = Yup.object().shape({
     .required("d kiritilishi shart!")
     .positive("Musbat son kiriting!")
     .integer("Butun son kiriting!"),
-  data: Yup.number()
-    .required("Natija kiritilishi shart!")
+  n: Yup.number()
+    .required("d kiritilishi shart!")
     .positive("Musbat son kiriting!")
-    .integer("Butun son kiriting!")
+    .integer("Butun son kiriting!"),
+  data: Yup.string().required("Natija kiritilishi shart!"),
 });

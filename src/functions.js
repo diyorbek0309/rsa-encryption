@@ -1,10 +1,13 @@
-export const encrypt = (p, q, e, k, message) => {
-  let result = {
-      encrypted: [],
-      d: null,
-    },
-    c = "",
+import bigInt from "big-integer";
+
+export const encrypt = (p, q, e, message) => {
+  let c = "",
     n = p * q;
+  let result = {
+    encrypted: [],
+    d: null,
+    n,
+  };
   let phi = (p - 1) * (q - 1);
   e = parseInt(e);
 
@@ -17,23 +20,34 @@ export const encrypt = (p, q, e, k, message) => {
   for (let i = 0; i < n; i++) {
     if ((i * e) % phi === 1) {
       result.d = i;
-      console.log(i);
       break;
     }
   }
-  console.log(numbers);
   for (let i = 0; i < numbers.length; i++) {
-    c = Math.pow(numbers[i], e) % n;
+    let big = bigInt(Math.pow(numbers[i], e));
+    c = big % n;
     result.encrypted.push(c);
   }
-
-  console.log(result);
 
   return result;
 };
 
-export const decrypt = (d, data) => {
-  let result = "";
+export const decrypt = (d, n, data) => {
+  let result = "",
+    decrypted = [],
+    alphabet = "abcdefghijklmnopqrstuvwxyz";
+  d = parseInt(d);
+  n = parseInt(n);
+  data = data.split(", ");
+  for (let i = 0; i < data.length; i++) {
+    data[i] = parseInt(data[i]);
+    let big = bigInt(Math.pow(data[i], d) % n);
+    decrypted.push(big);
+  }
+
+  for (let i = 0; i < decrypted.length; i++) {
+    result += alphabet[decrypted[i] - 1];
+  }
 
   return result;
 };
