@@ -41,9 +41,11 @@ export const decrypt = (d, n, data) => {
   data = data.split(", ");
   for (let i = 0; i < data.length; i++) {
     data[i] = parseInt(data[i]);
-    let big = bigInt(Math.pow(data[i], d) % n);
+    let big = bigInt(Math.pow(data[i] % n, d)) % n;
     decrypted.push(big);
   }
+
+  console.log(decrypted);
 
   for (let i = 0; i < decrypted.length; i++) {
     result += alphabet[decrypted[i] - 1];

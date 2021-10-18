@@ -6,12 +6,12 @@ import { useRef, useState } from "react";
 
 const RSAForm = ({ type }) => {
   const [possibleE, setPossibleE] = useState();
+  /* eslint-disable */
   const [p, setP] = useState("");
   const [q, setQ] = useState("");
+  /* eslint-enable */
   const [result_e, setResult_e] = useState("");
   const [result_d, setResult_d] = useState("");
-
-  console.log(p, q);
 
   const formRef = useRef();
 
