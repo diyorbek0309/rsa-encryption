@@ -1,13 +1,10 @@
 export const calculatorE = (p, q) => {
   let e = [];
-  let n = p * q;
+  let phi = (p - 1) * (q - 1);
 
-  for (let i = 0; i < n; i++) {
-    if (areCoprimes(i, n)) {
+  for (let i = 0; i < phi; i++) {
+    if (areCoprimes(i, phi)) {
       e.push(i);
-    }
-    if (e.length > 5) {
-      break;
     }
   }
 

@@ -26,7 +26,7 @@ const RSAForm = ({ type }) => {
   };
 
   const onSubmitEncrypt = ({ p, q, e, message }) => {
-    setResult_e(encrypt(p, q, e, message));
+    setResult_e(encrypt(p, q, e, 2, message));
   };
 
   const onSubmitDecrypt = () => {
@@ -38,7 +38,10 @@ const RSAForm = ({ type }) => {
       <div>
         <h2>Shifrlash natijasi:</h2>
         <h3>
-          <i>{result_e}</i>
+          <i>{result_e.encrypted && result_e.encrypted.join(", ")}</i>
+        </h3>
+        <h3>
+          <i>d = {result_e.d}</i>
         </h3>
       </div>
     ) : (
