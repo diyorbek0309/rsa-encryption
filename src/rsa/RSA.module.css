@@ -1,0 +1,69 @@
+.encrypt__wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.result {
+  padding-bottom: 20px;
+}
+
+.encrypt__wrap h2 {
+  font-size: 36px;
+  margin-top: 20px;
+}
+
+.encrypt__form {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  background-color: aqua;
+  margin: 20px 0;
+  border-radius: 10px;
+}
+
+.encrypt__form label {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 15px 0;
+  font-size: 18px;
+}
+
+.encrypt__form div {
+  color: #f00;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: right;
+}
+
+.encrypt__form input,
+textarea {
+  padding: 4px 8px;
+  border: none;
+  outline-color: aqua;
+  border-radius: 5px;
+}
+
+.encrypt__form button {
+  width: 20%;
+  padding: 7px 20px;
+  font-size: 20px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+.encrypt__form button {
+  background-color: rgb(1, 114, 67);
+  color: #fff;
+}
+
+.encrypt__form button:hover {
+  background-color: rgb(255, 255, 255);
+  color: rgb(1, 114, 67);
+}

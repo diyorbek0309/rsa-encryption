@@ -17,7 +17,7 @@ export const encrypt = (p, q, e, message) => {
   for (let i = 0; i < message.length; i++) {
     numbers.push(alphabet.indexOf(message[i]) + 1);
   }
-  for (let i = 0; i < n; i++) {
+  for (let i = 1; i <= n; i++) {
     if ((i * e) % phi === 1) {
       result.d = i;
       break;
@@ -41,7 +41,7 @@ export const decrypt = (d, n, data) => {
   data = data.split(", ");
   for (let i = 0; i < data.length; i++) {
     data[i] = parseInt(data[i]);
-    let big = bigInt(Math.pow(data[i] % n, d)) % n;
+    let big = bigInt(Math.pow(data[i], d)) % n;
     decrypted.push(big);
   }
 

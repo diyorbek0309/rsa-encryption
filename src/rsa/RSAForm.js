@@ -1,8 +1,9 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { encrypt, decrypt } from "./functions";
-import { EncryptSchema, DecryptSchema } from "./Schema";
-import { calculatorE } from "./Utilities";
+import { EncryptSchema, DecryptSchema } from "./RSASchema";
+import { calculatorE } from "../Utilities";
 import { useRef, useState } from "react";
+import classes from "./RSA.module.css";
 
 const RSAForm = ({ type }) => {
   const [possibleE, setPossibleE] = useState();
@@ -35,7 +36,7 @@ const RSAForm = ({ type }) => {
 
   let result =
     type === "encrypt" ? (
-      <div>
+      <div className={classes.result}>
         <h2>Shifrlash natijasi:</h2>
         <h3>
           <i>{result_e.encrypted && result_e.encrypted.join(", ")}</i>
@@ -48,7 +49,7 @@ const RSAForm = ({ type }) => {
         </h3>
       </div>
     ) : (
-      <div>
+      <div className={classes.result}>
         <h2>Deshifrlash natijasi:</h2>
         <h3>
           <i>{result_d}</i>
@@ -59,8 +60,8 @@ const RSAForm = ({ type }) => {
   return (
     <>
       {type === "encrypt" ? (
-        <div className="encrypt__wrap">
-          <h1>RSA algoritmi yordamida shifrlash</h1>
+        <div className={classes.encrypt__wrap}>
+          <h2>RSA algoritmi yordamida shifrlash</h2>
           <Formik
             initialValues={{
               p: "",
@@ -72,7 +73,7 @@ const RSAForm = ({ type }) => {
             onSubmit={(values) => onSubmitEncrypt(values)}
             innerRef={formRef}
           >
-            <Form className="encrypt__form">
+            <Form className={classes.encrypt__form}>
               <label>
                 p ni kiriting:
                 <Field
@@ -122,8 +123,8 @@ const RSAForm = ({ type }) => {
           </Formik>
         </div>
       ) : (
-        <div className="encrypt__wrap">
-          <h1>RSA algoritmi yordamida deshifrlash</h1>
+        <div className={classes.encrypt__wrap}>
+          <h2>RSA algoritmi yordamida deshifrlash</h2>
           <Formik
             initialValues={{
               d: "",
@@ -134,7 +135,7 @@ const RSAForm = ({ type }) => {
             onSubmit={(values) => onSubmitDecrypt(values)}
             innerRef={formRef}
           >
-            <Form className="encrypt__form">
+            <Form className={classes.encrypt__form}>
               <label>
                 d ni kiriting:
                 <Field
